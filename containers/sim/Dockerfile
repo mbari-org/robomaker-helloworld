@@ -1,6 +1,6 @@
 # Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
 # SPDX-License-Identifier: MIT-0
-FROM helloworld_ros_melodic_gazebo9_app:latest
+FROM helloworld_ros_melodic_gazebo9_base:latest
 
 # Build the Simulation application
 RUN cd /home/robomaker/workspace/aws-robomaker-sample-application-helloworld-ros1/simulation_ws && \
