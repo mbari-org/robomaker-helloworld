@@ -14,6 +14,11 @@ https://docs.aws.amazon.com/robomaker/latest/dg/run-hello-world-ros.html
 
 # Build and run locally
 
+```
+git clone https://github.com/mbari-org/robomaker-helloworld.git
+cd robomaker-helloworld
+```
+
 Build
   
 ```bash
