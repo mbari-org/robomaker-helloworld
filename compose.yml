@@ -4,7 +4,7 @@ services:
   app:
     build:
       context: containers/app
-    image: helloworld_ros_melodic_gazebo9_app:latest
+    image: helloworld_ros_melodic_gazebo9_app:${GIT_VERSION}
     user: robomaker
     environment:
       #- DISPLAY=host.docker.internal:0  # For macOS
@@ -17,12 +17,12 @@ services:
   sim:
     build:
       context: containers/sim
-    image: helloworld_ros_melodic_gazebo9_simulator:latest
+    image: helloworld_ros_melodic_gazebo9_simulator:${GIT_VERSION}
     user: robomaker
     environment:
       #- DISPLAY=host.docker.internal:0  # For macOS
       - DISPLAY
-      - XAUTHORITY=/root/.Xauthority 
+      - XAUTHORITY=/root/.Xauthority
       - ROBOMAKER_GAZEBO_MASTER_URI=http://localhost:5555
       - ROBOMAKER_ROS_MASTER_URI=http://localhost:11311
     volumes:

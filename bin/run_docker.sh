@@ -5,9 +5,9 @@ set -x
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}" )" && pwd )"
 BASE_DIR="$(cd "$(dirname "${SCRIPT_DIR}/../.." )" && pwd )"
 
-# Build the base image
-cd $BASE_DIR/containers/base
-docker build -t mbari/base -t helloworld_ros_melodic_gazebo9_base:latest .
+# Get the short version of the hash of the commit
+git_hash=$(git log -1 --format=%h)
+GIT_VERSION="${git_hash}"
 
 # Build the robot app and simulation images
-docker-compose -f $BASE_DIR/compose.yml up --remove-orphans
+GIT_VERSION=$GIT_VERSION docker-compose -f $BASE_DIR/compose.yml up --remove-orphans

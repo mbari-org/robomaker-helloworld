@@ -41,4 +41,15 @@ app_1  | GAZEBO_MODEL_PATH=/usr/share/gazebo-9/models:
 app_1  | LC_ALL=C.UTF-8
 app_1  | LD_LIBRARY_PATH=/opt/ros/melodic/lib:/usr/lib/aarch64-linux-gnu/gazebo-9/plugins
 app_1  | LANG=C.UTF-8
-...
+```
+
+# Grab temporary credentials from console 
+
+[MBARI AWS](https://mbari.awsapps.com/start#/) 
+
+# Push to AWS ECR
+
+```bash
+./bin/build_and_push_aws.sh
+```
+
