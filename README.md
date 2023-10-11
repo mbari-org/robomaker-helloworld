@@ -12,22 +12,11 @@ https://docs.aws.amazon.com/robomaker/latest/dg/run-hello-world-ros.html
  - [Docker](https://docs.docker.com/get-docker/)
  - [Docker Compose](https://docs.docker.com/compose/install/)
 
-# Build and run locally
+# Run locally
 
 ```
 git clone https://github.com/mbari-org/robomaker-helloworld.git
 cd robomaker-helloworld
-```
-
-Build
-  
-```bash
-./bin/build_docker.sh
-```
-
-Run
-
-```bash
 ./bin/run_docker.sh
 ```
 
