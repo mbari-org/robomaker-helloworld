@@ -13,4 +13,4 @@ GIT_VERSION="${git_hash}"
 cd $BASE_DIR/containers/base && docker build -t helloworld_foxy_g11_base:${GIT_VERSION} .
 
 # Build the robot app and simulation images
-cd $BASE_DIR && GIT_VERSION=${GIT_VERSION} docker-compose -f compose.yml up --build --no-cache
+cd $BASE_DIR && GIT_VERSION=${GIT_VERSION} docker-compose -f compose.yml up --build
