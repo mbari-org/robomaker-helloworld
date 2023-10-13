@@ -1,0 +1,34 @@
+version: '3.8'
+
+services:
+  app:
+    build:
+      context: containers/app
+      args:
+        - GIT_VERSION=${GIT_VERSION}
+    user: robomaker
+    command: /bin/bash -c "ros2 launch hello_world_robot rotate.launch.py"
+    environment:
+      #- DISPLAY=host.docker.internal:0  # For macOS
+      - DISPLAY
+      - XAUTHORITY=/root/.Xauthority 
+      - ROBOMAKER_GAZEBO_MASTER_URI=http://localhost:5555
+      - ROBOMAKER_ROS_MASTER_URI=http://localhost:11311
+    volumes:
+        - /tmp/.X11-unix:/tmp/.X11-unix
+
+  sim:
+    build:
+      context: containers/sim
+      args:
+        - GIT_VERSION=${GIT_VERSION}
+    user: robomaker
+    command: /bin/bash -c "ros2 launch hello_world_simulation empty_world.launch.py"
+    environment:
+      #- DISPLAY=host.docker.internal:0  # For macOS
+      - DISPLAY
+      - XAUTHORITY=/root/.Xauthority
+      - ROBOMAKER_GAZEBO_MASTER_URI=http://localhost:5555
+      - ROBOMAKER_ROS_MASTER_URI=http://localhost:11311
+    volumes:
+        - /tmp/.X11-unix:/tmp/.X11-unix
