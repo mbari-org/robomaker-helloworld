@@ -5,7 +5,7 @@ if [ ! -z $GAZEBO_MASTER_URI ]; then
 fi
 
 cd /home/robomaker/workspace/aws-robomaker-sample-application-helloworld-ros2/simulation_ws
-source /opt/ros/melodic/setup.bash
+source /opt/ros/foxy/setup.bash
 source /usr/share/gazebo-11/setup.sh
 source ./install/setup.sh
 
