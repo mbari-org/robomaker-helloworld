@@ -5,7 +5,7 @@ FROM ros:foxy
 ENV DEBIAN_FRONTEND noninteractive
 
 RUN apt-get clean
-RUN apt-get update && apt-get install -y \
+RUN apt-get update --allow-insecure-repositories && apt-get install -y --allow-unauthenticated \
     lsb  \
     unzip \
     wget \
@@ -23,7 +23,7 @@ RUN apt-get update && apt-get install -y \
 
 RUN wget https://packages.osrfoundation.org/gazebo.key -O - | sudo apt-key add -; \
     sh -c 'echo "deb http://packages.osrfoundation.org/gazebo/ubuntu-stable `lsb_release -cs` main" > /etc/apt/sources.list.d/gazebo-stable.list'
-RUN apt-get update && apt-get install -y gazebo11
+RUN apt-get update --allow-insecure-repositories && apt-get install -y --allow-unauthenticated gazebo11
 
 ENV QT_X11_NO_MITSHM=1
 
