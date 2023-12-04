@@ -1,8 +1,12 @@
 # Basic RoboMaker Hello World 
 
 Basic repo to understand how to run a sample app and simulation in ROS and Gazebo.
-Essentially the same as the reference below with better organization and docker
-compose orchestration.
+
+Similar to the reference below with better organization, docker
+compose orchestration, docker build/push scripts, and MBARI specific
+login information.
+
+This has been tested on Ubuntu
 
 References:
 
@@ -25,8 +29,12 @@ https://docs.aws.amazon.com/robomaker/latest/dg/run-hello-world-ros-2.html
 ```
 git clone https://github.com/mbari-org/robomaker-helloworld.git
 cd robomaker-helloworld/foxy
+docker login
 ./bin/build_and_run.sh
 ```
+
+NOTE - if you see the error **ERROR: failed to solve: helloworld_foxy_g11_base:1fe1cac: pull access denied, repository does not exist or may require authorization: server message: insufficient_scope: authorization failed**
+this likely means that you have not logged into docker
 
 Should see something like this:
 
@@ -45,20 +53,33 @@ This launches two docker containers: one for the robot application, and the othe
 ## Visualize the simulation using Gazebo with
 
 ```bash
-./bin/run_viz.sh
+./bin/viz_sim.sh
 ```
 
 # Run in AWS RoboMaker
 
 ## Setup your credentials using awscli
 
-For the exercise, I used a local account setup as if this would be a new user/student.
+Login with your MBARI credentials at [https://mbari.awsapps.com/start#/](https://mbari.awsapps.com/start#/)
+and download your credentials. Then run the following command to configure your 
+credentials locally in the `902204-compas` profile.:
+ 
 
 ```bash
 aws configure --profile 902204-compas
 ```
 
+To use that profile, set the AWS_PROFILE environment variable
+
+```shell
+export AWS_PROFILE=902204-compas
+```
+
+
 ## Push to AWS ECR
+
+The docker images need to be pushed to AWS ECR, which is akin to the Docker Hub
+but hosted in AWS.  This is done using the following script.
 
 Be patient - this takes a while.
 
@@ -68,5 +89,10 @@ Be patient - this takes a while.
 
 should see something like the following upon completion 
 ```
-
-```
+++ git log -1 --format=%h
++ git_hash=1fe1cac
++ GIT_VERSION=1fe1cac
++ cd /Users/dcline/Dropbox/code/robomaker-helloworld/foxy/containers/base
++ docker build -t helloworld_foxy_g11_base:1fe1cac .
+...
+ 

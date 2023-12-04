@@ -2,7 +2,7 @@
 # Build and push docker image with needed dependencies for running to the ECR
 # The role for this ec2 user must support ecr:InitiateLayerUpload
 # This will build and upload the image <account>.dkr.ecr.us-west-2.amazonaws.com/helloworld_ros_melodic_gazebo9_app:<github hash>
-# Run with ./build_and_push_aws.sh helloworld_ros_melodic_gazebo9_app
+# Run with ./build_and_push_aws.sh
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}" )" && pwd )"
 BASE_DIR="$(cd "$(dirname "${SCRIPT_DIR}/../.." )" && pwd )"
 set -x

@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
-# Build the docker images. Needs to be run before ./run_docker.sh
-# Run with ./build_docker.sh
+# Build and run the docker images
+# Run with ./build_and_run.sh
 set -x
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}" )" && pwd )"
 BASE_DIR="$(cd "$(dirname "${SCRIPT_DIR}/../.." )" && pwd )"
