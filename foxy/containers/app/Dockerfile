@@ -3,10 +3,6 @@
 ARG GIT_VERSION
 FROM helloworld_foxy_g11_base:${GIT_VERSION}
 
-RUN sudo apt update && \
-    rosdep update && \
-    rosdep fix-permissions
-
 # Build the Robot application
 RUN cd robot_ws && \
  sudo bash -c 'source /opt/ros/foxy/setup.bash && \
