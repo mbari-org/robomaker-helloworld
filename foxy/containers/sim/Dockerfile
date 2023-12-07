@@ -3,9 +3,6 @@
 ARG GIT_VERSION
 FROM helloworld_foxy_g11_base:$GIT_VERSION
 
-WORKDIR /home/robomaker/workspace/aws-robomaker-sample-application-helloworld-ros2
-
-
 # Build the Simulation application
 RUN cd simulation_ws && \
  sudo bash -c 'source /opt/ros/foxy/setup.bash && \

@@ -7,8 +7,6 @@ RUN sudo apt update && \
     rosdep update && \
     rosdep fix-permissions
 
-WORKDIR /home/robomaker/workspace/aws-robomaker-sample-application-helloworld-ros2
-
 # Build the Robot application
 RUN cd robot_ws && \
  sudo bash -c 'source /opt/ros/foxy/setup.bash && \
@@ -24,4 +22,3 @@ RUN sh -c 'sudo chown robomaker:robomaker /home/robomaker/robot-entrypoint.sh'
 
 CMD ros2 launch hello_world_robot rotate.launch.py
 ENTRYPOINT [ "/home/robomaker/robot-entrypoint.sh" ]
-              
