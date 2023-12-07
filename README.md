@@ -94,11 +94,9 @@ should see something like the following upon completion
 + GIT_VERSION=1fe1cac
 + cd /Users/dcline/Dropbox/code/robomaker-helloworld/foxy/containers/base
 + docker build -t helloworld_foxy_g11_base:1fe1cac .
-...
 docker push 731784785618.dkr.ecr.us-west-2.amazonaws.com/mbari/helloworld_foxy_g11_sim:1fe1cac
 The push refers to repository [731784785618.dkr.ecr.us-west-2.amazonaws.com/mbari/helloworld_foxy_g11_sim]
 8
-...
 docker push 731784785618.dkr.ecr.us-west-2.amazonaws.com/mbari/helloworld_foxy_g11_app:1fe1cac
 The push refers to repository [731784785618.dkr.ecr.us-west-2.amazonaws.com/mbari/helloworld_foxy_g11_app]
 ...
