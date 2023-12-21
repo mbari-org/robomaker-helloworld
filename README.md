@@ -6,9 +6,10 @@ Similar to the reference below with better organization, docker
 compose orchestration, docker build/push scripts, and MBARI specific
 login information.
 
-This has been tested on Ubuntu
+This has been tested on Ubuntu.  It may work on Mac and Windows, but has not been tested.
 
 References:
+
 
 https://docs.aws.amazon.com/robomaker/latest/dg/run-hello-world-ros.html
 https://docs.aws.amazon.com/robomaker/latest/dg/run-hello-world-ros-2.html
@@ -19,16 +20,11 @@ https://docs.aws.amazon.com/robomaker/latest/dg/run-hello-world-ros-2.html
  - [Docker Compose](https://docs.docker.com/compose/install/)
  - AWS account with ECR, S3, and RoboMaker permission
 
-# Notes
-
- - Melodic/Gazebo 9 failed with core dump so switching to Foxy and Gazebo 11 10-11-23
- - Foxy/Gazebo 11 working with some minor changes in the run-hello-world-ros-2 example
-
 # Run locally
 
 ```
 git clone https://github.com/mbari-org/robomaker-helloworld.git
-cd robomaker-helloworld/foxy
+cd robomaker-helloworld
 docker login
 ./bin/build_and_run.sh
 ```
@@ -92,7 +88,7 @@ should see something like the following upon completion
 ++ git log -1 --format=%h
 + git_hash=1fe1cac
 + GIT_VERSION=1fe1cac
-+ cd /Users/dcline/Dropbox/code/robomaker-helloworld/foxy/containers/base
++ cd /Users/dcline/Dropbox/code/robomaker-helloworld/containers/base
 + docker build -t helloworld_foxy_g11_base:1fe1cac .
 docker push 731784785618.dkr.ecr.us-west-2.amazonaws.com/mbari/helloworld_foxy_g11_sim:1fe1cac
 The push refers to repository [731784785618.dkr.ecr.us-west-2.amazonaws.com/mbari/helloworld_foxy_g11_sim]
@@ -101,3 +97,64 @@ docker push 731784785618.dkr.ecr.us-west-2.amazonaws.com/mbari/helloworld_foxy_g
 The push refers to repository [731784785618.dkr.ecr.us-west-2.amazonaws.com/mbari/helloworld_foxy_g11_app]
 ...
  
+
+### Run the simulation in a AWS RoboMaker Job
+
+```shell
+./bin/run_robomaker_simulation.sh
+```
+
+This will create a RoboMaker job and run the simulation in the cloud.  You can monitor the job in the AWS console.
+
+You should see the simulation job details printed in JSON with details about the job, e.g.
+Pending, Running, etc.
+
+Here, we see tha the job is pending. Job defaults can be overriden in the bin/simulation_job_tempate.json file.
+
+```json
+{
+    "arn": "arn:aws:robomaker:us-west-2:731784785618:simulation-job/sim-vzl06993swmc",
+    "status": "Pending",
+    "lastUpdatedAt": 1697318042.0,
+    "failureBehavior": "Fail",
+    "clientRequestToken": "29c4a2e4-cc57-4cb0-b715-481f978fd0ff",
+    "loggingConfig": {
+        "recordAllRosTopics": false
+    },
+    "maxJobDurationInSeconds": 300,
+    "simulationTimeMillis": 0,
+    "iamRole": "arn:aws:iam::731784785618:role/robomaker-jobs",
+    "simulationApplications": [
+        {
+            "application": "arn:aws:robomaker:us-west-2:731784785618:simulation-application/hector_quadrotor_simulation/1697314270351",
+            "applicationVersion": "$LATEST",
+            "launchConfig": {
+                "streamUI": true,
+                "command": [
+                    "roslaunch",
+                    "hector_quadrotor_demo",
+                    "double_void.launch"
+                ]
+            },
+            "uploadConfigurations": [],
+            "useDefaultUploadConfigurations": false,
+            "tools": [
+                {
+                    "streamUI": true,
+                    "name": "gzclient",
+                    "command": "/simulation-entrypoint.sh && gzclient",
+                    "streamOutputToCloudWatch": true,
+                    "exitBehavior": "RESTART"
+                }
+            ],
+            "useDefaultTools": false
+        }
+    ],
+    "tags": {},
+    "compute": {
+        "simulationUnitLimit": 1,
+        "computeType": "CPU",
+        "gpuUnitLimit": 0
+    }
+}
+```

@@ -1,0 +1,32 @@
+{
+    "maxJobDurationInSeconds": 300,
+    "iamRole": "arn:aws:iam::731784785618:role/robomaker-jobs",
+    "failureBehavior": "Fail",
+    "compute": {
+        "simulationUnitLimit": 1
+    },
+    "tags":  {
+         "mbari:project-name" : "helloworld",
+         "mbari:project-owner" : "dcline"
+    },
+    "simulationApplications": [
+        {
+            "application": "SIMULATION_APPLICATION_ARN",
+            "launchConfig": {
+                "streamUI": true,
+                "command": [
+                    "ros2", "launch", "hello_world_simulation", "empty_world.launch.py"
+                ]
+            },
+            "tools": [
+                {
+                    "streamUI": true,
+                    "name": "gzclient",
+                    "command": "/home/robomaker/simulation-entrypoint.sh && gzclient",
+                    "streamOutputToCloudWatch": true,
+                    "exitBehavior": "RESTART"
+                }
+            ]
+        }
+    ]
+}
